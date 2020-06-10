@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -52,5 +53,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		                           "/*.html", "/*.js", "/*.css", "/*.woff2", "/*.ttf", "/*.eot",
 															 "/*.svg", "/*.woff", "/*.ico");
 	}
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH").allowedOrigins("*")
+                .allowedHeaders("*");
+    }
 
 }
